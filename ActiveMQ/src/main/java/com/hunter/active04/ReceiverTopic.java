@@ -20,10 +20,10 @@ public class ReceiverTopic {
         Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
         // 4. 找目的地，获取destination， 消费端，也会从这个目的地取消息
 
-        Destination queue = session.createQueue("user");
+        Destination topic = session.createTopic("user");
 
         // 5. 消息消费者
-        MessageConsumer consumer = session.createConsumer(queue);
+        MessageConsumer consumer = session.createConsumer(topic);
 
         // 6. 获取消息
         while (true) {
