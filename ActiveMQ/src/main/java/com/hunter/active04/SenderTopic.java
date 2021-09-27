@@ -45,6 +45,7 @@ public class SenderTopic {
 
         // 5.1 消息创建者
         MessageProducer producer = session.createProducer(topic);
+        producer.setTimeToLive(10000);
         // 全局设置消息优先级 0最低 9最高
         // producer.setPriority(9);
         // consumer -> 消费者

@@ -42,22 +42,10 @@ public class SenderQueue {
 
         // 5.1 消息创建者
         MessageProducer producer = session.createProducer(queue);
-        // 全局设置消息优先级 0最低 9最高
-        // producer.setPriority(9);
-        // consumer -> 消费者
-        // producer -> 创建者
-        // 5.2 创建消息
-        for (int i = 0; i < 1000; i++) {
-            TextMessage textMessage = session.createTextMessage("hi + " + i);
-            // 5.3 向目的地写入消息
-            if (i % 4 == 0) {
-                producer.send(textMessage, DeliveryMode.PERSISTENT, 9, 1000 * 1000);
-            } else {
-                producer.send(textMessage);
+        Person person = new Person("hunter", 21, 1);
+        ObjectMessage objectMessage = session.createObjectMessage(person);
+        producer.send(objectMessage);
 
-            }
-            //session.commit();
-        }
         // 6. 关闭连接
 
         session.close();

@@ -26,10 +26,22 @@ public class ReceiverTopic {
         MessageConsumer consumer = session.createConsumer(topic);
 
         // 6. 获取消息
-        while (true) {
+        // 同步， 阻塞
+/*        while (true) {
             TextMessage message = (TextMessage)consumer.receive();
             System.out.println("message:" + message.getText());
             message.acknowledge();
-        }
+        }*/
+        // 异步， 监听器
+        consumer.setMessageListener(new MessageListener() {
+            public void onMessage(Message message) {
+                TextMessage textMessage = (TextMessage) message;
+                try {
+                    System.out.println("message:" + textMessage.getText());
+                } catch (JMSException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
