@@ -63,7 +63,14 @@
               <policyEntries>
 			  
 				<!-- config using prioritized message for queue user -->
-				<policyEntry queue="user" prioritizedMessages="true" />
+				<policyEntry queue="user" prioritizedMessages="true">
+					<!-- config dead message queue -->
+					<deadLetterStrategy> 
+
+					<individualDeadLetterStrategy   queuePrefix="xxooQ." useQueueForQueueMessages="true" /> 
+
+				</deadLetterStrategy> 
+				</policyEntry>
 				
                 <policyEntry topic=">" >
                     <!-- The constantPendingMessageLimitStrategy is used to prevent
