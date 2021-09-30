@@ -1,12 +1,8 @@
-package com.hunter.active05;
+package com.hunter.active06;
 
-import com.hunter.active04.Person;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
-import java.io.FileOutputStream;
-import java.io.Serializable;
-import java.util.concurrent.TimeUnit;
 
 public class ReceiverQueue {
     public static void main(String[] args) throws JMSException, InterruptedException {

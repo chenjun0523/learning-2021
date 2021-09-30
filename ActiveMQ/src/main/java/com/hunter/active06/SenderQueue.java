@@ -11,7 +11,7 @@ public class SenderQueue {
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(
                 "admin",
                 "admin",
-                "tcp://localhost:61616?jms.producerWindowSize=1048576"
+                "tcp://localhost:61616"
         );
         // 2. 获取一个向ActiveMQ的连接
         Connection connection = activeMQConnectionFactory.createConnection();
@@ -19,14 +19,13 @@ public class SenderQueue {
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         // 4. 找目的地，获取destination， 消费端，也会从这个目的地取消息
 
-        Queue queue = session.createQueue("user?producer.windowSize=1048576");
+        Queue queue = session.createQueue("user");
 
         // 5.1 消息创建者
         MessageProducer producer = session.createProducer(queue);
         producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-        producer.setTimeToLive(1000);
 
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100000; i++) {
             TextMessage textMessage = session.createTextMessage();
             textMessage.setText("hi~" + i);
 
